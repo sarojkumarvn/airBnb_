@@ -1,0 +1,88 @@
+package com.viper.projects.airBnbApp.entity;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.viper.projects.airBnbApp.entity.enums.BookingStatus;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hotel_id", nullable = false)
+    private Hotel hotel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
+
+    @Column(nullable = false)
+    private BigDecimal roomCount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(nullable = false)
+    private Integer roomsCount;
+
+
+    @Column(nullable = false )
+    private LocalDate checkInDate;
+
+    @Column(nullable = false )
+    private LocalDate checkOuDate;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="payment_id")
+    private Payment payment ;
+
+    @Enumerated(EnumType.STRING) // This thing refres to that this column can have only values like there in the bookingStatus enum 
+    @Column(nullable = false)
+    private BookingStatus bookingStatus ;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name="booking_guest",
+        joinColumns = @JoinColumn(name="booking_id"),
+        inverseJoinColumns = @JoinColumn(name="guest_id")
+
+
+    )
+    private Set<Guest> guests ;
+
+}
