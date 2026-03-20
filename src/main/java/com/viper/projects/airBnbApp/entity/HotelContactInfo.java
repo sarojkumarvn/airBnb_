@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Embeddable   //You want to store a group of fields inside another table without creating a separate table.
 public class HotelContactInfo {
-    private String contactNo;
-    private String mobileNo ;
+    private String address;
+    private String phoneNumber ;
     private String email ;
     private String location;
 
