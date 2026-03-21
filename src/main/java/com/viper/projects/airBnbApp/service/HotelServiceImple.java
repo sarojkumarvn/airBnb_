@@ -38,4 +38,42 @@ public class HotelServiceImple implements HotelService {
         return modelMapper.map(hotel , HotelDto.class);
     }
 
+    @Override
+    public HotelDto updateHotelById(Long id , HotelDto hotelDto ) {
+        log.info("Getting the hotel with id : {}", id);
+        Hotel hotel = hotelRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Hotel not found with the id : " + id));
+        modelMapper.map(hotelDto , hotel);
+        hotel.setId(id);
+        hotel = hotelRepository.save(hotel);
+        return modelMapper.map(hotel  , HotelDto.class);
+
+
+
+    }
+
+    @Override
+    public void deleteHotelById(Long id) {
+        boolean exist = hotelRepository.existsById(id);
+        if(!exist) throw new ResourceNotFoundException("Hotel not found ");
+        hotelRepository.deleteById(id);
+
+        //TODO : Delete the future inventorties for this hotel 
+
+        
+    }
+
+    @Override
+    public void activateHotel(Long hotelId) {
+
+        log.info("Activating the hotel with ID : {}" , hotelId);
+        Hotel hotel = hotelRepository.findById(hotelId)
+                       .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exist with the Id : {}" + hotelId));
+                       
+        hotel.setActive(true);
+        // TODO : create inventory for all teh rooms 
+
+    }
+
+
+
 }
