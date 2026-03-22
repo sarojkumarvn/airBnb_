@@ -77,7 +77,7 @@ public class RoomServiceImple implements RoomService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Room not found " + roomId));
 
-        inventoryService.deleteFutureInventories(room);
+        inventoryService.deleteAllInventories(room);
         roomRepository.delete(room);
     }
 }

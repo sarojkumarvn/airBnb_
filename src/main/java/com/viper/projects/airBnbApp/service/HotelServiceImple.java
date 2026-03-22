@@ -8,6 +8,7 @@ import com.viper.projects.airBnbApp.entity.Hotel;
 import com.viper.projects.airBnbApp.entity.Room;
 import com.viper.projects.airBnbApp.exception.ResourceNotFoundException;
 import com.viper.projects.airBnbApp.repository.HotelRepository;
+import com.viper.projects.airBnbApp.repository.RoomRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class HotelServiceImple implements HotelService {
     private final HotelRepository hotelRepository;
     private final ModelMapper modelMapper;
     private final InventoryService inventoryService ;
+    private final RoomRepository  roomRepository ;
 
     @Override
     public HotelDto createNewHotel(HotelDto hotelDto) {
@@ -60,17 +62,13 @@ public class HotelServiceImple implements HotelService {
         Hotel hotel = hotelRepository.findById(id)
                        .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exist with the Id : {}" + id ));
       
-        hotelRepository.deleteById(id);
 
-        //TODO : Delete the future inventories for this hotel
-        for(Room room : hotel.getRooms()) 
-                    inventoryService.deleteFutureInventories(room);
-       
-
-
-
-
-        
+                       hotelRepository.deleteById(id);
+                       for(Room room : hotel.getRooms()) {
+                           inventoryService.deleteAllInventories(room);            
+                           roomRepository.deleteById(room.getId());
+                        }
+               
     }
 
     @Override
