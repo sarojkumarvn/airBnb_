@@ -18,7 +18,8 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
             MethodParameter returnType,
             Class<? extends HttpMessageConverter<?>> converterType
     ) {
-        return true;
+
+        return !returnType.getParameterType().equals(ApiResponse.class);
     }
 
     @Override

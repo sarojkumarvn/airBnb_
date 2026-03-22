@@ -1,20 +1,22 @@
 package com.viper.projects.airBnbApp.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-import com.viper.projects.airBnbApp.entity.Hotel;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 public class RoomDto {
     private Long id ;
     private String type ;
     private BigDecimal basePrice ;
     private String[] photos ;
     private String[] amenities ;
-    private Integer totalcount ;
+    private Integer totalCount ;
     private Integer capacity ;
 
 

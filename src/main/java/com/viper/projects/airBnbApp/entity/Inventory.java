@@ -17,13 +17,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@Table(uniqueConstraints = @UniqueConstraint(name = "unique_hotel_room_date" , columnNames = {"hotel_id" ,"room_id" , "date"}))
+@Table(
+    uniqueConstraints = @UniqueConstraint(
+        name = "unique_hotel_room_date",
+        columnNames = {"hotel_id", "room_id", "date"}
+    )
+)
+@Builder
+@NoArgsConstructor
+@lombok.AllArgsConstructor
+
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

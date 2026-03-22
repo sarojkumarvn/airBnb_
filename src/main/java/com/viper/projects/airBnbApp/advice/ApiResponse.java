@@ -1,29 +1,27 @@
 package com.viper.projects.airBnbApp.advice;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
 public class ApiResponse<T> {
-    private LocalDateTime timeStamp ;
-    private T data ;
-    private ApiError error ;
 
-    public ApiResponse() { this.timeStamp = LocalDateTime.now();}
+    private LocalDateTime timeStamp;
+    private T data;
+    private ApiError error;
 
-    public ApiResponse(T table) {
-        this();
-        this.data= data ;
-
+    public ApiResponse() {
+        this.timeStamp = LocalDateTime.now();
     }
 
-    public ApiResponse (ApiError error) {
+    public ApiResponse(T data) {
         this();
-        this.error = error ;
+        this.data = data;
     }
 
-
-
+    public ApiResponse(ApiError error) {
+        this();
+        this.error = error;
+    }
 }

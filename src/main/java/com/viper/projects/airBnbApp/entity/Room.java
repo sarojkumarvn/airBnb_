@@ -18,6 +18,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+
+// Getters and setters already done in this 
 public class Room {
 
     @Id

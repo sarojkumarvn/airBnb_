@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.viper.projects.airBnbApp.exception.ResourceNotFoundException;
 
-
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -47,5 +45,4 @@ public class GlobalExceptionHandler {
                 apiError.getStatus()
         );
     }
-
 }
