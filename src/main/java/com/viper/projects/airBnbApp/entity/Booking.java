@@ -22,13 +22,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Booking {
 
     @Id
@@ -44,21 +50,20 @@ public class Booking {
     private Room room;
 
     @Column(nullable = false)
-    private BigDecimal roomCount;
+    private Integer roomCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
-    private Integer roomsCount;
+    
 
 
     @Column(nullable = false )
     private LocalDate checkInDate;
 
     @Column(nullable = false )
-    private LocalDate checkOuDate;
+    private LocalDate checkOutDate;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -66,9 +71,6 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="payment_id")
-    private Payment payment ;
 
     @Enumerated(EnumType.STRING) // This thing refres to that this column can have only values like there in the bookingStatus enum 
     @Column(nullable = false)
@@ -84,5 +86,9 @@ public class Booking {
 
     )
     private Set<Guest> guests ;
+
+
+    @Column(nullable =  false , precision = 10 , scale = 2 )
+    private BigDecimal amount ;
 
 }

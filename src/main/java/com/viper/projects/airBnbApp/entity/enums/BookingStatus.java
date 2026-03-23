@@ -1,8 +1,11 @@
 package com.viper.projects.airBnbApp.entity.enums;
 
 public enum BookingStatus {
-    RESERVED ,
-    CONFIRMED , 
-    CANCELLED 
+    RESERVED,
+    GUEST_ADDED,
+    PAYMENT_PENDING,
+    CONFIRMED,
+    CANCELLED,
+    EXPIRED
 
 }

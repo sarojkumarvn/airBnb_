@@ -1,9 +1,13 @@
 package com.viper.projects.airBnbApp.service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.viper.projects.airBnbApp.dto.HotelDto;
+import com.viper.projects.airBnbApp.dto.HotelInfoDto;
+import com.viper.projects.airBnbApp.dto.RoomDto;
 import com.viper.projects.airBnbApp.entity.Hotel;
 import com.viper.projects.airBnbApp.entity.Room;
 import com.viper.projects.airBnbApp.exception.ResourceNotFoundException;
@@ -90,6 +94,20 @@ public class HotelServiceImple implements HotelService {
 
 
     }
+
+
+    @Override
+    public HotelInfoDto getHotelInfoById(Long hotelId){
+        Hotel hotel = hotelRepository.findById(hotelId)
+                       .orElseThrow(()-> new ResourceNotFoundException("Hotel does not exist with the Id : {}" + hotelId));
+        List<RoomDto> rooms = hotel.getRooms()
+        .stream()
+        .map((e) -> modelMapper.map(e , RoomDto.class)).toList(); 
+        
+        
+        return new HotelInfoDto(modelMapper.map(hotel , HotelDto.class) , rooms);
+        
+    } 
 
 
 

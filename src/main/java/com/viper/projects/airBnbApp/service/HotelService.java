@@ -1,6 +1,7 @@
 package com.viper.projects.airBnbApp.service;
 
 import com.viper.projects.airBnbApp.dto.HotelDto;
+import com.viper.projects.airBnbApp.dto.HotelInfoDto;
 
 
 
@@ -17,6 +18,8 @@ public interface HotelService {
     void deleteHotelById(Long id );
 
     void activateHotel(Long id ) ;
+
+    HotelInfoDto getHotelInfoById( Long hotelId);
     
 
 

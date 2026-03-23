@@ -37,7 +37,7 @@ public class InventoryServiceImple implements InventoryService {
             Inventory inventory = Inventory.builder()
                     .hotel(room.getHotel())
                     .room(room)
-                    .bookedCount(0)
+                    .bookedCount(BigDecimal.ZERO)
                     .city(room.getHotel().getCity())
                     .date(today)
                     .price(room.getBasePrice())

@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -26,43 +28,37 @@ public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-
+    private long id;
 
     @Column(nullable = false)
-    private String name ;
+    private String name;
 
-
-    private String city ;
+    private String city;
 
     @Column(columnDefinition = "TEXT[]")
-    private String[] photos ;
-
+    private String[] photos;
 
     @Column(columnDefinition = "TEXT[]")
     private String[] amenities;
-
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updatedAt ;
-
+    private LocalDateTime updatedAt;
 
     @Embedded
-    private HotelContactInfo contactInfo ;
+    private HotelContactInfo contactInfo;
 
     @Column(nullable = false)
 
-    private Boolean active ;
+    private Boolean active;
 
+    @JsonIgnore
     @ManyToOne
-    private User owner ;
+    private User owner;
 
     @OneToMany(mappedBy = "hotel")
-    private List<Room> rooms ;
-
-
+    private List<Room> rooms;
 
 }

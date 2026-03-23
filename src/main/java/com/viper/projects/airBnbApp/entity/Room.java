@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +31,7 @@ public class Room {
 
     @ManyToOne
     @JoinColumn(name="hotel_id" , nullable = false)
+    @JsonIgnore
     private Hotel hotel ;
 
 
@@ -57,7 +61,7 @@ public class Room {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @CreationTimestamp
+    @UpdateTimestamp
     private LocalDateTime updatedAt ;
     
 
