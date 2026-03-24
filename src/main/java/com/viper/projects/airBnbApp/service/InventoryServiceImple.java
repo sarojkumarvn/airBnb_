@@ -37,7 +37,8 @@ public class InventoryServiceImple implements InventoryService {
             Inventory inventory = Inventory.builder()
                     .hotel(room.getHotel())
                     .room(room)
-                    .bookedCount(BigDecimal.ZERO)
+                    .bookedCount(0)
+                    .reservedCount(0)
                     .city(room.getHotel().getCity())
                     .date(today)
                     .price(room.getBasePrice())
@@ -62,33 +63,34 @@ public class InventoryServiceImple implements InventoryService {
 
     }
 
-    @Override
-    // we need to get the hotels which have at least one room who has the space for the user from the start date to the end date 
-    public Page<HotelDto> searchHotels(HotelSearchRequest hotelSearchRequest) {
-        Pageable pageable = PageRequest.of(hotelSearchRequest.getPage() , hotelSearchRequest.getSize());
+@Override
+public Page<HotelDto> searchHotels(HotelSearchRequest hotelSearchRequest) {
 
-        LocalDate startdate = hotelSearchRequest.getStartDate();
-        LocalDate endDate = hotelSearchRequest.getEndDate();
-        String city = hotelSearchRequest.getCity() ;
-        Integer roomCount = hotelSearchRequest.getRoomsCount() ;
+    Pageable pageable =
+            PageRequest.of(hotelSearchRequest.getPage(),
+                    hotelSearchRequest.getSize());
 
+    LocalDate startdate = hotelSearchRequest.getStartDate();
+    LocalDate endDate = hotelSearchRequest.getEndDate();
 
-        
+    String city = hotelSearchRequest.getCity();
+    Integer roomCount = hotelSearchRequest.getRoomsCount();
 
-        Long dateCount = ChronoUnit.DAYS.between(startdate , endDate) + 1 ;
+    // ⭐ checkout exclusive
+    Long dateCount = ChronoUnit.DAYS.between(startdate, endDate);
 
-       Page<Hotel> hotelPage= inventoryRepository.findHotelsByAvailableInventory(city, startdate,endDate, roomCount,dateCount, pageable);
+    Page<Hotel> hotelPage =
+            inventoryRepository.findHotelsByAvailableInventory(
+                    city,
+                    startdate,
+                    endDate.minusDays(1),
+                    roomCount,
+                    dateCount,
+                    pageable
+            );
 
-       return hotelPage.map((e) -> modelMapper.map(e , HotelDto.class));
-        
-       
-
-        
-
-    }
-
-
-
+    return hotelPage.map(h -> modelMapper.map(h, HotelDto.class));
+}
 
 
 }

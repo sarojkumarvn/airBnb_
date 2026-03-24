@@ -1,6 +1,9 @@
 package com.viper.projects.airBnbApp.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.viper.projects.airBnbApp.dto.BookingDto;
 import com.viper.projects.airBnbApp.dto.BookingRequest;
+import com.viper.projects.airBnbApp.dto.GuestDto;
 import com.viper.projects.airBnbApp.service.BookingService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,5 +30,14 @@ public class HotelBookingController {
 
 
     }
+
+    @PostMapping("/{bookingId}/addGuests")
+    public ResponseEntity<Object> addGuests(
+        @PathVariable Long bookingId ,
+        @RequestBody List<GuestDto> guestDtoList) {
+        return ResponseEntity.ok(bookingService.addGuests(bookingId , guestDtoList));
+        
+    }
+
 
 }

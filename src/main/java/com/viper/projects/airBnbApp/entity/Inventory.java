@@ -54,10 +54,10 @@ public class Inventory {
     @Column(nullable = false)
     private LocalDate date ;
 
-    @Column(nullable = false , columnDefinition = "INTEGER DEFAULT 0")
-    private BigDecimal bookedCount ;
+    @Column(nullable = false )
+    private Integer bookedCount ;
 
-    @Column(nullable = false , columnDefinition = "INTEGER DEFAULT 0")
+    @Column(nullable = false )
     private Integer reservedCount ;
 
     @Column(nullable = false )
