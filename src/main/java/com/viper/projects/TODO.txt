@@ -1,0 +1,2 @@
+Delete and modify the guests before initiating the booking 
+add taxes and fees per night 

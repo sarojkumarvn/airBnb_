@@ -1,6 +1,6 @@
 package com.viper.projects.airBnbApp.repository;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -65,7 +65,8 @@ public interface InventoryRepository extends JpaRepository<Inventory , Long > {
         @Param("roomId") Long roomId ,
         @Param("startDate") LocalDate startDate ,
         @Param("endDate") LocalDate endDate ,
-        @Param("roomsCount") Integer roomsCount 
+        @Param("roomsCount") Integer roomsCount
+
     
     );
     

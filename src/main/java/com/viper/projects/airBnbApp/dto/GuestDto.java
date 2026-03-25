@@ -2,7 +2,6 @@ package com.viper.projects.airBnbApp.dto;
 
 import java.util.Set;
 
-import com.viper.projects.airBnbApp.entity.Booking;
 import com.viper.projects.airBnbApp.entity.User;
 import com.viper.projects.airBnbApp.entity.enums.Gender;
 
@@ -15,4 +14,7 @@ public class GuestDto {
     private String name;
     private Gender gender;
     private Integer age;
+
+
+    
 }

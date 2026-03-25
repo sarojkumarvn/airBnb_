@@ -151,6 +151,8 @@ public class BookingServiceImple implements BookingService {
       }
 
 
+
+
       public boolean hasBookingExpired(Booking booking) {
             return booking.getCreatedAt().plusMinutes(10).isBefore(LocalDateTime.now());
 
@@ -161,6 +163,9 @@ public class BookingServiceImple implements BookingService {
             user.setId(1L);
             return user ;
       }
+
+
+      // TODO : Delete or Modify the guest before booking ! 
 
       
 }

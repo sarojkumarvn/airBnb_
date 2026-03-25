@@ -78,7 +78,7 @@ public class Booking {
 
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
+    @JoinTable( 
         name="booking_guest",
         joinColumns = @JoinColumn(name="booking_id"),
         inverseJoinColumns = @JoinColumn(name="guest_id")
