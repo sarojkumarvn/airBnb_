@@ -42,4 +42,11 @@ public class HotelMinPrice {
     @UpdateTimestamp
     private LocalDateTime updateAt; 
 
+
+
+    public  HotelMinPrice(Hotel hotel , LocalDate date ) {
+        this.hotel = hotel ;
+        this.date = date ;
+    }
+
 }

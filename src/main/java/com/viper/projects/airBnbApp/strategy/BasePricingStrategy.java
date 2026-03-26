@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.viper.projects.airBnbApp.entity.Inventory;
 
 
-@Service
+
 public class BasePricingStrategy implements PricingStrategy {
 
     @Override

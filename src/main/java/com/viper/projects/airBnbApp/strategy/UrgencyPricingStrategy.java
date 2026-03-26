@@ -2,16 +2,14 @@ package com.viper.projects.airBnbApp.strategy;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
-import org.springframework.stereotype.Service;
 
 import com.viper.projects.airBnbApp.entity.Inventory;
 
 import lombok.RequiredArgsConstructor;
 
 
-@Service
+
 @RequiredArgsConstructor
 public class UrgencyPricingStrategy implements PricingStrategy {
 

@@ -1,6 +1,8 @@
 package com.viper.projects.airBnbApp.repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.viper.projects.airBnbApp.dto.HotelPriceDto;
+import com.viper.projects.airBnbApp.entity.Hotel;
 import com.viper.projects.airBnbApp.entity.HotelMinPrice;
 
 public interface HotelMinPriceRepository extends JpaRepository<HotelMinPrice , Long > {
@@ -35,5 +38,7 @@ public interface HotelMinPriceRepository extends JpaRepository<HotelMinPrice , L
         Pageable pageable
         
     ) ;
+
+    Optional<HotelMinPrice> findByHotelAndDate(Hotel hotel, LocalDate date);
 
 }

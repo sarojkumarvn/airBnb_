@@ -1,9 +1,9 @@
 package com.viper.projects.airBnbApp.dto;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 
-import org.springframework.cglib.core.Local;
+
 
 import lombok.Data;
 
