@@ -1,2 +1,2 @@
-Delete and modify the guests before initiating the booking 
-add taxes and fees per night 
+Delete and modify the guests after booking
+add taxes and fees per night according to the factors the taxes should be same but the fees is dynamic in nature 

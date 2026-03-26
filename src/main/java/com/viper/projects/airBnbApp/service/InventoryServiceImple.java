@@ -12,10 +12,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.viper.projects.airBnbApp.dto.HotelDto;
+import com.viper.projects.airBnbApp.dto.HotelPriceDto;
 import com.viper.projects.airBnbApp.dto.HotelSearchRequest;
 import com.viper.projects.airBnbApp.entity.Hotel;
 import com.viper.projects.airBnbApp.entity.Inventory;
 import com.viper.projects.airBnbApp.entity.Room;
+import com.viper.projects.airBnbApp.repository.HotelMinPriceRepository;
 import com.viper.projects.airBnbApp.repository.InventoryRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class InventoryServiceImple implements InventoryService {
     private final InventoryRepository inventoryRepository;
     private final ModelMapper modelMapper ;
+    private final HotelMinPriceRepository hotelMinPriceRepository ;
 
     @Override
     public void initializeRoomForAYear(Room room) {
@@ -64,7 +67,7 @@ public class InventoryServiceImple implements InventoryService {
     }
 
 @Override
-public Page<HotelDto> searchHotels(HotelSearchRequest hotelSearchRequest) {
+public Page<HotelPriceDto> searchHotels(HotelSearchRequest hotelSearchRequest) {
 
     Pageable pageable =
             PageRequest.of(hotelSearchRequest.getPage(),
@@ -79,8 +82,13 @@ public Page<HotelDto> searchHotels(HotelSearchRequest hotelSearchRequest) {
     // ⭐ checkout exclusive
     Long dateCount = ChronoUnit.DAYS.between(startdate, endDate);
 
-    Page<Hotel> hotelPage =
-            inventoryRepository.findHotelsByAvailableInventory(
+
+    // Business logic -- If the serching happen for more than 90 days then we can go to the other inventory or else we can go to another inventory 
+
+   
+
+    Page<HotelPriceDto> hotelPage =
+            hotelMinPriceRepository.findHotelsByAvailableInventory(
                     city,
                     startdate,
                     endDate.minusDays(1),
@@ -89,7 +97,7 @@ public Page<HotelDto> searchHotels(HotelSearchRequest hotelSearchRequest) {
                     pageable
             );
 
-    return hotelPage.map(h -> modelMapper.map(h, HotelDto.class));
+    return hotelPage;
 }
 
 

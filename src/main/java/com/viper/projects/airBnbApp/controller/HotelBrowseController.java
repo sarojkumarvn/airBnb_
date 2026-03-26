@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.viper.projects.airBnbApp.dto.HotelDto;
 import com.viper.projects.airBnbApp.dto.HotelInfoDto;
+import com.viper.projects.airBnbApp.dto.HotelPriceDto;
 import com.viper.projects.airBnbApp.dto.HotelSearchRequest;
 import com.viper.projects.airBnbApp.service.HotelService;
 import com.viper.projects.airBnbApp.service.InventoryService;
@@ -25,9 +26,10 @@ public class HotelBrowseController {
     private final HotelService hotelService ;
 
     @GetMapping("/search")
-    public ResponseEntity<Page<HotelDto>> searchHotels(@RequestBody HotelSearchRequest hotelSearchRequest) {
+    public ResponseEntity<Page<HotelPriceDto>> searchHotels(@RequestBody HotelSearchRequest hotelSearchRequest) {
+        
 
-        Page<HotelDto> page = inventoryService.searchHotels(hotelSearchRequest);
+       var page = inventoryService.searchHotels(hotelSearchRequest);
         return ResponseEntity.ok(page);
 
     }

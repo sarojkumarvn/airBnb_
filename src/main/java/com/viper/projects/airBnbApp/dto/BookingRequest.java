@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 
 
-// These daat should be transfered during the booking time 
+// These data should be transfered during the booking time 
 public class BookingRequest {
     private Long hotelId ;
     private Long roomId ;
